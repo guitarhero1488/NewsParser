@@ -10,7 +10,7 @@ class Parser
     function __construct($url)
     {
         $this->news  = $this->parsing($url);
-        $this->words = $this->stat($this->news["title"]);
+        $this->words = $this->stat($this->news);
     }
 
     function parsing($url)
@@ -34,17 +34,18 @@ class Parser
         $links = $items[0]->find('a');
         foreach($links as $a) {
             if($a->class != "b-link-external") {
+                $i++;
                 $time = $a->getElementByTagName('time');
                 preg_match("/[а-я]+/", $time->datetime, $date);
                 $date = preg_replace("/[а-я]+/", $months[$date[0]], $time->datetime);
-                $news["date"][]  = date("Y-m-d H:i", strtotime($date));
+                $news[$i]["date"] = date("Y-m-d H:i", strtotime($date));
                 $a->children(0)->outertext='';
-                $news["title"][] = $a->innertext;
+                $title = preg_replace("/(&nbsp;)+/", " ", $a->innertext);
+                $news[$i]["title"] = $title;
                 if($a->target == "_blank") {
-                    $news["links"][] = $a->href;
-                }
-                else {
-                    $news["links"][] = $url.$a->href;
+                    $news[$i]["link"] = $a->href;
+                } else {
+                    $news[$i]["link"] = $url.$a->href;
                 }
             }
         }
@@ -53,14 +54,11 @@ class Parser
 
     function stat($news)
     {
-        foreach($news as $title) {
-            $title = preg_replace("/(&nbsp;)+/", " ", $title);
-            $str .= $title." ";
+        foreach($news as $item) {
+            $str .= $item["title"]." ";
         }
         $words = explode(" ", $str);
         array_pop($words);
         return array_count_values($words);
     }
 }
-
-?>
