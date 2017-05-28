@@ -55,10 +55,10 @@ class Parser
     function stat($news)
     {
         foreach($news as $item) {
-            $str .= $item["title"]." ";
+            $i++;
+            $list = explode(" ", $item["title"]);
+            $words[$i][] = $list;
         }
-        $words = explode(" ", $str);
-        array_pop($words);
-        return array_count_values($words);
+        return $words;
     }
 }
