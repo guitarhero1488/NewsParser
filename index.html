@@ -9,40 +9,43 @@
     <title>News</title>
 </head>
 <body>
-    <section class="clearfix">
-        <div class="col-md-8 col-sm-12 news">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Date</th>
-                        <th>Link</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>                
-            </table>
-        </div>
-        <div class="col-md-4 col-sm-12 stat">
-            <div class="panel panel-default">
-                <div class="panel-heading">Statistics</div>
-                <div class="panel-body">
-                    <p>There is some statistics of words repetition.</p>
-                </div>
+    <div class="wrapper">
+        <section class="clearfix">
+            <div class="col-md-8 col-sm-12 news">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Word</th>
-                            <th>Count</th>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Link</th>
                         </tr>
                     </thead>
-                    <tbody></tbody> 
+                    <tbody></tbody>                
                 </table>
             </div>
-        </div>
+            <div class="col-md-4 col-sm-12 stat">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Statistics</div>
+                    <div class="panel-body">
+                        <p>There is some statistics of words repetition.</p>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Word</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody> 
+                    </table>
+                </div>
+            </div>
+        </section>
         <button type="button" class="btn btn-primary">Refresh</button>
-    </section>
+    </div>
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/run.js"></script>
 </body>
 </html>
