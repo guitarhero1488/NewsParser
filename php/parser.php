@@ -38,15 +38,16 @@ class Parser
                 $time = $a->getElementByTagName('time');
                 preg_match("/[а-я]+/", $time->datetime, $date);
                 $date = preg_replace("/[а-я]+/", $months[$date[0]], $time->datetime);
-                $news[$i]["date"] = date("Y-m-d H:i", strtotime($date));
                 $a->children(0)->outertext='';
                 $title = preg_replace("/(&nbsp;)+/", " ", $a->innertext);
+                
                 $news[$i]["title"] = $title;
                 if($a->target == "_blank") {
                     $news[$i]["link"] = $a->href;
                 } else {
                     $news[$i]["link"] = $url.$a->href;
                 }
+                $news[$i]["date"] = date("Y-m-d H:i", strtotime($date));
             }
         }
         return $news;

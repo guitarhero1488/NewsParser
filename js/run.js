@@ -8,15 +8,16 @@ $(document).ready(function() {
     })
 });
 
-// $("button").on("click", function() {
-//     $.ajax({
-//         method: "GET",
-//         url: "php/db/parse.php",
-//         success: function(e) {
-//             console.log(e);
-//         }
-//     });
-// });
+$("button").on("click", function() {
+    $('.news table').children('tbody').empty();
+    $.ajax({
+        method: "GET",
+        url: "php/db/parse.php",
+        success: function(e) {
+            $('.news table').children('tbody').html(e);
+        }
+    });
+});
 
 $(document).on("click", '.link', function() {
     $url = $(this).data("url");
