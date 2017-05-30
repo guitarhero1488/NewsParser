@@ -9,11 +9,11 @@ class Parser
 
     function __construct($url)
     {
-        $this->news  = $this->parsing($url);
-        $this->words = $this->stat($this->news);
+        $this->news  = $this->parsePage($url);
+        $this->words = $this->getStat($this->news);
     }
 
-    function parsing($url)
+    function parsePage($url)
     {
         $months = [
             "января"   => "january",
@@ -21,7 +21,7 @@ class Parser
             "марта"    => "march",
             "апреля"   => "april",
             "мая"      => "may",
-            "июня"     => "juny",
+            "июня"     => "june",
             "июля"     => "july",
             "августа"  => "august",
             "сентября" => "september",
@@ -47,13 +47,13 @@ class Parser
                 } else {
                     $news[$i]["link"] = $url.$a->href;
                 }
-                $news[$i]["date"] = date("Y-m-d H:i", strtotime($date));
+                $news[$i]["date"] = date("Y-m-d H:i:s", strtotime($date));
             }
         }
         return $news;
     }
 
-    function stat($news)
+    function getStat($news)
     {
         foreach($news as $item) {
             $i++;

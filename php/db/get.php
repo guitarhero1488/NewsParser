@@ -2,7 +2,7 @@
 
 require_once('connection.php');
 
-$result = $conn->query("SELECT * FROM news ORDER BY date DESC")
+$result = $conn->query("SELECT * FROM news ORDER BY date DESC limit 10")
                     or die("Select error (".$conn->connect_errno.") ".$conn->connect_error);
 $str = '';
 while($row = $result->fetch_assoc()) {
