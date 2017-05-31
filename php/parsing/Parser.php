@@ -5,12 +5,10 @@ require_once('simple_html_dom.php');
 class Parser
 {
     public $news;
-    public $words;
 
     function __construct($url)
     {
         $this->news  = $this->parsePage($url);
-        $this->words = $this->getStat($this->news);
     }
 
     function parsePage($url)
@@ -51,15 +49,5 @@ class Parser
             }
         }
         return $news;
-    }
-
-    function getStat($news)
-    {
-        foreach($news as $item) {
-            $i++;
-            $list = explode(" ", $item["title"]);
-            $words[$i][] = $list;
-        }
-        return $words;
     }
 }
