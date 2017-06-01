@@ -11,7 +11,7 @@ $parser = new Parser('https://lenta.ru');
 $new = 0;
 foreach($parser->news as $news) {
     $new++;
-    while($row = $dbNews->fetch_assoc()) {
+    foreach($dbNews as $row) {
         if($news == $row) {
             $new--;
             break;
@@ -37,6 +37,18 @@ foreach(array_reverse($parser->news) as $news) {
                                                                                 '".$news["link"]."',
                                                                                 '".$news["date"]."')")
                 or die("Insert error (".$conn->connect_errno.") ".$conn->connect_error);
+    }
+}
+// word counting
+$conn->query("DELETE FROM words");
+$dbTitles = $conn->query("SELECT id, title FROM news ORDER BY id");
+$index = 1;
+foreach($dbTitles as $row) {
+    $w = explode(" ", $row["title"]);
+    for($i = 0; $i < count($w); $i++) {
+        $conn->query("INSERT INTO words (`id`, `word`) VALUES ('".$index."', '".$w[$i]."')");
+        $conn->query("INSERT INTO newswords (`news_id`, `word_id`) VALUES ('".$row["id"]."', '".$index."')");
+        $index++;
     }
 }
 include('get.php');
