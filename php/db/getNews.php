@@ -3,7 +3,7 @@
 require_once('connection.php');
 
 $result = $conn->query("SELECT * FROM news ORDER BY date DESC")
-                    or die("Select error (".$conn->connect_errno.") ".$conn->connect_error);
+                 or die("Select error (".$conn->connect_errno.") ".$conn->connect_error);
 $str = '';
 while($row = $result->fetch_assoc()) {
     $str .= "<tr class='panel-heading' role='tab' id='heading".$row["id"]."'>

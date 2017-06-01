@@ -34,8 +34,8 @@ class Parser
             if($a->class != "b-link-external") {
                 $i++;
                 $time = $a->getElementByTagName('time');
-                preg_match("/[июня|а-я]+/", $time->datetime, $date); // не хотел так делать, но с переходом на июнь слово "июня" стало невалидным для регулярки.....
-                $date = preg_replace("/[июня|а-я]+/", $months[$date[0]], $time->datetime);
+                preg_match("/[абвгдеиклмнопрстуфюя]+/", $time->datetime, $date);
+                $date = preg_replace("/[абвгдеиклмнопрстуфюя]+/", $months[$date[0]], $time->datetime);
                 $a->children(0)->outertext='';
                 $title = preg_replace("/(&nbsp;)+/", " ", $a->innertext);
                 

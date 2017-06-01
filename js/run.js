@@ -1,23 +1,40 @@
 $(document).ready(function() {
-    $.ajax({
-        method: "GET",
-        url: "php/db/get.php",
-        success: function(e) {
-            $('.news table').children('tbody').html(e);
-        }
-    })
+    insertNews();
+    insertStat();
 });
 
 $("button").on("click", function() {
-    $('.news table').children('tbody').empty();
     $.ajax({
         method: "GET",
         url: "php/db/parse.php",
+        success: function() {
+            insertNews();
+            insertStat();
+        }
+    });
+});
+
+function insertNews() {
+    $('.news table').children('tbody').empty();
+    $.ajax({
+        method: "GET",
+        url: "php/db/getNews.php",
         success: function(e) {
             $('.news table').children('tbody').html(e);
         }
     });
-});
+}
+
+function insertStat() {
+    $('.stat table').children('tbody').empty();
+    $.ajax({
+        method: "GET",
+        url: "php/db/getStat.php",
+        success: function(e) {
+            $('.stat table').children('tbody').html(e);
+        }
+    });
+}
 
 $(document).on("click", '.link', function() {
     $url = $(this).data("url");
